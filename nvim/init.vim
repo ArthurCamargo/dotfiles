@@ -18,6 +18,7 @@
         Plug 'mhartington/oceanic-next'
         Plug 'vim-syntastic/syntastic'
         Plug 'honza/vim-snippets'
+        Plug 'SirVer/ultisnips'
         Plug 'majutsushi/tagbar'
         Plug 'scrooloose/nerdtree'
         Plug 'ctrlpvim/ctrlp.vim'
@@ -37,14 +38,16 @@
         Plug 'lervag/vimtex'
         Plug 'tpope/vim-surround'
         Plug 'gkapfham/vim-vitamin-onec'
-        Plug 'octol/vim-cpp-enhanced-highlight'
         Plug 'flazz/vim-colorschemes'
         Plug 'felixhummel/setcolors.vim'
         Plug 'neoclide/coc.nvim', {'branch' : 'release'}
+        Plug 'franbach/miramare'
+        Plug 'sheerun/vim-polyglot'
+        Plug 'ervandew/supertab'
+
 
         call plug#end()
     "}
-    
     "COC"
     "{
         " if hidden is not set, TextEdit might fail.
@@ -65,22 +68,6 @@
 
         " always show signcolumns
         set signcolumn=yes
-
-        " Use tab for trigger completion with characters ahead and navigate.
-        " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-        inoremap <silent><expr> <TAB>
-                    \ pumvisible() ? "\<C-n>" :
-                    \ <SID>check_back_space() ? "\<TAB>" :
-                    \ coc#refresh()
-        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-        function! s:check_back_space() abort
-            let col = col('.') - 1
-            return !col || getline('.')[col - 1]  =~# '\s'
-        endfunction
-
-        " Use <c-space> to trigger completion.
-        inoremap <silent><expr> <c-space> coc#refresh()
 
         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
         " Coc only does snippet and additional edit on confirm.
@@ -176,13 +163,27 @@
         " Resume latest coc list
         nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+        "COC-SNIPPETS"
+        inoremap <silent><expr> <TAB>
+                    \ pumvisible() ? coc#_select_confirm() :
+                    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+                    \ <SID>check_back_space() ? "\<TAB>" :
+                    \ coc#refresh()
+
+        function! s:check_back_space() abort
+            let col = col('.') - 1
+            return !col || getline('.')[col - 1]  =~# '\s'
+        endfunction
+
+        let g:coc_snippet_next = '<tab>'
+
     "}
 
     "AIRLINE"
     "{
         "AIRLINE"
         let g:airline_powerline_fonts = 1
-        let g:airline_theme='luna'
+        let g:airline_theme='tomorrow'
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tabline#left_sep = ' '
         let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -202,7 +203,7 @@
 
         noremap <leader>c :VimtexCompile<CR>
     "}
-
+    
     "NERDTREE"
     "{
         "NERDTREE"
@@ -232,7 +233,7 @@
     "CONFIGURACOES BASICAS
     "
     "
-    set colorcolumn=68
+    set colorcolumn=80
     " Marca a linha que nao podemos ultrapassar
     "
     set number
@@ -256,7 +257,12 @@
     set termguicolors
     "Gui colors
 
-    set guicursor=n-ci:hor30-iCursor-blinkwait300-blinkon200-blinkoff150
+    highlight Cursor guifg=white guibg=black
+    highlight iCursor guifg=white guibg=steelblue
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=i:ver100-iCursor
+    set guicursor+=n-v-c:blinkon0
+    set guicursor+=i:blinkwait10
     "Set a underline in the normal mode
 
     set encoding=utf-8
@@ -299,7 +305,7 @@
     set nowrap
     "Faz o vim nao mostrar texto fora do tamanho do terminal
 
-    set formatoptions=tcqrn1
+    "set formatoptions=tcqrn1
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
@@ -338,7 +344,7 @@
     set viminfo='100,h,n~/.vim/viminfo
     "Deixa os arquivos no .vim
 
-    colo OceanicNext
+    colo Atelier_PlateauLight
     "Cor bonita
 
     nnoremap ; :
@@ -355,6 +361,9 @@
 "MAPPINGS"
 "{{{
     "MAPPINGS
+
+    nnoremap<space>t :CocCommand explorer<CR>
+    "Abre o explorador de arquivos do coc
 
     nnoremap<leader>t :e#<CR>
     "Abre o ultimo arquivo que foi fechado
@@ -424,9 +433,9 @@
     nnoremap <leader>q <esc>:bd!<CR>
     "Fecha um buffer
     
-    nnoremap <c-w> :wqa!<CR>
-    inoremap <c-w> :wqa!<CR>
-    vnoremap <c-w> :wqa!<CR>
+    "nnoremap <c-w> :wqa!<CR>
+    "inoremap <c-w> :wqa!<CR>
+    "vnoremap <c-w> :wqa!<CR>
 
     inoremap jk <esc>
     "Deixa de ter que ficar apertando esc
@@ -446,6 +455,8 @@
 
 ""AUTOCMDS""
 "{{{
-
+  autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
+  autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+  autocmd filetype cpp nnoremap <F5> :w <bar> exec '!make && ./dtp test/test1.dtp'<CR>
 "}}}
 
