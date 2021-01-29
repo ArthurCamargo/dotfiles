@@ -6,21 +6,15 @@
     "PLUGINS"
 
     "VIM-PLUG
-    "{
+    "{ 
         call plug#begin('~/.vim/plugged')
-        if has('nvim')
-            Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-        elseif  v:version >= 800
-            Plug 'Shougo/denite.nvim'
-        endif
-
-
-        Plug 'mhartington/oceanic-next'
+        Plug 'sainnhe/sonokai'
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'Shougo/denite.nvim'
         Plug 'vim-syntastic/syntastic'
         Plug 'honza/vim-snippets'
         Plug 'SirVer/ultisnips'
         Plug 'majutsushi/tagbar'
-        Plug 'scrooloose/nerdtree'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'ryanoasis/vim-devicons'
         Plug 'chemzqm/denite-extra'
@@ -28,23 +22,30 @@
         Plug 'xolox/vim-misc'
         Plug 'tpope/vim-fugitive'
         Plug 'airblade/vim-gitgutter'
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        Plug 'Shougo/deoplete.nvim'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'kshenoy/vim-signature'
-        Plug 'morhetz/gruvbox'
-        Plug 'godlygeek/tabular'
+        Plug 'junegunn/vim-easy-align'
         Plug 'bling/vim-bufferline'
         Plug 'lervag/vimtex'
         Plug 'tpope/vim-surround'
         Plug 'gkapfham/vim-vitamin-onec'
         Plug 'flazz/vim-colorschemes'
+        Plug 'ghifarit53/tokyonight-vim'
+        Plug 'dracula/vim', { 'name': 'dracula' }
         Plug 'felixhummel/setcolors.vim'
-        Plug 'neoclide/coc.nvim', {'branch' : 'release'}
         Plug 'franbach/miramare'
         Plug 'sheerun/vim-polyglot'
         Plug 'ervandew/supertab'
-
+        Plug 'lervag/vimtex'
+        Plug 'vimwiki/vimwiki'
+        Plug 'tools-life/taskwiki'
+        Plug 'blindFS/vim-taskwarrior'
+        Plug 'christoomey/vim-tmux-navigator'
+        Plug 'powerman/vim-plugin-AnsiEsc'
+        Plug 'octol/vim-cpp-enhanced-highlight'
+        Plug 'rakr/vim-one'
 
         call plug#end()
     "}
@@ -71,9 +72,9 @@
 
         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
         " Coc only does snippet and additional edit on confirm.
-        inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+        "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
         " Or use `complete_info` if your vim support it, like:
-        " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+         inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
         " Use `[g` and `]g` to navigate diagnostics
         nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -100,7 +101,7 @@
         autocmd CursorHold * silent call CocActionAsync('highlight')
 
         " Remap for rename current word
-        nmap <leader>rn <Plug>(coc-rename)
+        nmap <leader>rn <Plug>(cocnrename)
 
         " Remap for format selected region
         xmap <leader>f  <Plug>(coc-format-selected)
@@ -179,11 +180,15 @@
 
     "}
 
+    "EASY-ALIGN"
+    "Visual mode do easy align
+        xmap ga <Plug>(EasyAlign)
+        nmap ga <Plug>(EasyAlign)
     "AIRLINE"
     "{
         "AIRLINE"
         let g:airline_powerline_fonts = 1
-        let g:airline_theme='tomorrow'
+        let g:airline_theme='one'
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tabline#left_sep = ' '
         let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -201,23 +206,7 @@
         set conceallevel=1
         let g:tex_conceal='abdmg'
 
-        noremap <leader>c :VimtexCompile<CR>
-    "}
-    
-    "NERDTREE"
-    "{
-        "NERDTREE"
-        "Toogle a arvore de arquivos
-        nnoremap <space>t <esc>:NERDTreeToggle<CR>
-    "}
-
-    "TABULAR"
-    "{
-        "TABULAR"
-        nmap <Leader>a= :Tabularize /=<CR>
-        vmap <Leader>a= :Tabularize /=<CR>
-        nmap <Leader>a: :Tabularize /:\zs<CR>
-        vmap <Leader>a: :Tabularize /:\zs<CR>
+        nmap <leader>c :VimtexCompile<CR>
     "}
 
     "TAGBAR"
@@ -225,6 +214,11 @@
         "TAGBAR"
         nmap <F7> :TagbarToggle<CR>
         "Toogle com f8
+    "}
+    "VIM WIKI"
+    "{
+        let g:vimwiki_list = [{'path': '~/.vimwiki/',
+                    \ 'path_html': '~/.vimwiki_html'}]
     "}
 "}}}
 
@@ -256,14 +250,6 @@
 
     set termguicolors
     "Gui colors
-
-    highlight Cursor guifg=white guibg=black
-    highlight iCursor guifg=white guibg=steelblue
-    set guicursor=n-v-c:block-Cursor
-    set guicursor+=i:ver100-iCursor
-    set guicursor+=n-v-c:blinkon0
-    set guicursor+=i:blinkwait10
-    "Set a underline in the normal mode
 
     set encoding=utf-8
     " Encoding
@@ -318,10 +304,6 @@
     set nowb
     "Tenta nao criar arquivos swap
 
-    nnoremap p p=`]
-    nnoremap P P=`]
-    "Indenta codigo colado
-
     set backspace=indent,eol,start
     "Faz o backspace funcionar como deveria
 
@@ -344,8 +326,15 @@
     set viminfo='100,h,n~/.vim/viminfo
     "Deixa os arquivos no .vim
 
-    colo Atelier_PlateauLight
+    colo tokyonight
     "Cor bonita
+
+    "Highligh
+    let g:cpp_class_scope_highlight = 1
+    let g:cpp_member_variable_highlight = 1
+    let g:cpp_class_decl_highlight = 1
+    let g:cpp_concepts_highlight = 1
+
 
     nnoremap ; :
     vnoremap ; :
@@ -374,7 +363,7 @@
     nnoremap <leader>e :Errors <CR>
     "Mostra o que nao faz compilar
 
-    nnoremap <leader>us :UltiSnipsEdit<CR>
+    nnoremap <leader>us :CocCommand snippets.editSnippets<CR>
     "Map ,es para editar os snippets
 
     nnoremap ( ci(
@@ -391,12 +380,13 @@
     nnoremap O o<esc>k
     "Cria linhas brancas abaixo
 
+
     nnoremap <space>s :vsplit!
     nnoremap <space>h :hsplit!
     "Splits
 
-    noremap <silent> <Leader>+ :exe "vertical resize " . (winwidth(0) * 3/2) <CR>
-    nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3) <CR>
+    noremap <silent> <leader>+ :exe "vertical resize " . (winwidth(0) * 3/2) <CR>
+    nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 2/3) <CR>
     "Muda o tamanho do split
 
     nnoremap <leader>s :s/
@@ -409,16 +399,18 @@
     "Seleciona um paragrafo
 
 
-    nnoremap <leader>ev <esc>:tabedit $MYVIMRC<CR>
+    nnoremap <leader>ev <esc>:edit $MYVIMRC<CR>
     "Edita o vimrc
 
     nnoremap <leader>sv <esc>:source $MYVIMRC<CR>
     "Utiliza o vimrc
 
+    nnoremap <leader>ez <esc>:edit $ZSHRC<CR>
+    "Edita o zshrc
+
     nnoremap <leader>w <esc>:w!<CR>
     nnoremap <c-s> :w<CR>
-    inoremap <c-s> <ESC>:w<CR>
-
+    inoremap <c-s> <ESC>:w<CR>a
     vnoremap <c-s> :w<CR>
     "Salva com facilidade
 
@@ -432,7 +424,7 @@
 
     nnoremap <leader>q <esc>:bd!<CR>
     "Fecha um buffer
-    
+
     "nnoremap <c-w> :wqa!<CR>
     "inoremap <c-w> :wqa!<CR>
     "vnoremap <c-w> :wqa!<CR>
@@ -455,8 +447,42 @@
 
 ""AUTOCMDS""
 "{{{
-  autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
-  autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-  autocmd filetype cpp nnoremap <F5> :w <bar> exec '!make && ./dtp test/test1.dtp'<CR>
+    if has("autocmd")
+        augroup templates
+            autocmd BufNewFile *.tex 0r ~/.vim/templates/skeleton.tex
+            autocmd filetype tex nnoremap <leader>et :edit ~/.vim/templates/skeleton.tex
+
+            autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+            autocmd filetype py nnoremap <leader>et :edit ~/.vim/templates/skeleton.py
+
+            autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
+            autocmd filetype cpp nnoremap <leader>et :edit ~/.vim/templates/skeleton.cpp<CR>
+        augroup END
+
+        augroup running
+            autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
+            autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+            autocmd filetype cpp nnoremap <F5> :w <bar> exec '!make && ./dtp test/test1.dtp'<CR>
+            autocmd filetype ocaml nnoremap <F5> :w <bar> exec '!ocamlc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+        augroup END
+
+    endif
+"}}}
+
+""ABREVIACOES""
+"{{{
+    ab eh é
+    ab concentracao concentração
+    ab descricao descrição
+
+    augroup latex
+        autocmd filetype tex ab or \lor
+        autocmd filetype tex ab and \land
+        autocmd filetype tex ab -> \rightarrow
+        autocmd filetype tex ab sqr ^2
+        autocmd filetype tex ab cube ^3
+        autocmd filetype tex ab <= \leq
+        autocmd filetype tex ab >= \geq
+    augroup END
 "}}}
 

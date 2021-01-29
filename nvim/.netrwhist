@@ -1,2 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/etc/systemd'
+let g:netrw_dirhist_2='/etc'
+let g:netrw_dirhist_1='/etc/sysctl.d'
+let g:netrw_dirhist_0='/home/guest/University/Cientific-Introduction/Combinatoric-Optimization/Minimum-Cost-Dominating-Tree/Codes/Domtree/dominating_tree/src'
+let g:netrw_dirhist_9='/home/guest/University/Cientific-Introduction/Combinatoric-Optimization/Minimum-Cost-Dominating-Tree/Codes/Domtree/dominating_tree'
+let g:netrw_dirhist_8='/home/guest/University/Cientific-Introduction/Combinatoric-Optimization/Minimum-Cost-Dominating-Tree/Codes/Domtree/dominating_tree/src'
+let g:netrw_dirhist_7='/home/guest/University/Cientific-Introduction/Combinatoric-Optimization/Minimum-Cost-Dominating-Tree/Codes/Domtree/dominating_tree'
+let g:netrw_dirhist_6='/home/guest/University/Cientific-Introduction/Combinatoric-Optimization/Minimum-Cost-Dominating-Tree/Codes/Domtree/dominating_tree/src'
+let g:netrw_dirhist_5='/home'
+let g:netrw_dirhist_4='/home/guest'
