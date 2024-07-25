@@ -104,3 +104,18 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# bun completions
+[ -s "/home/arthur/.bun/_bun" ] && source "/home/arthur/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# cargo
+export CARGO_INSTALL="$HOME/.cargo/"
+export PATH="$CARGO_INSTALL/bin:$PATH"
