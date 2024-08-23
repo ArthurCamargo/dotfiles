@@ -3,3 +3,7 @@
 [user]
 	name = ArthurCamargo
 	email = avccamargo@inf.ufrgs.br
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
