@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: current time
+# key: now
+# --
+`(format-time-string "%H:%M")`
