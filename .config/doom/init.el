@@ -14,6 +14,12 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+;; Locale
+(setenv "LC_TIME" "pt_BR.utf8")
+(set-locale-environment "pt_BR.utf8")
+(setq system-time-locale "pt_BR.utf8")
+
+
 (doom! :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
        ;;chinese
@@ -26,7 +32,7 @@
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life
-       vertico             ; the search engine of the future
+       (vertico +icons)    ; the search engine of the future
 
        :ui
        ;;deft                ; notational velocity for Emacs
@@ -35,7 +41,7 @@
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        (emoji +unicode)    ; 🙂
        hl-todo             ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;;indent-guides     ; highlighted indent columns
+       indent-guides     ; highlighted indent columns
        ;;ligatures         ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
        modeline            ; snazzy, Atom-inspired modeline, plus API
@@ -44,20 +50,20 @@
        ophints             ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;smooth-scroll     ; So smooth you won't believe it's not butter
-       ;;tabs              ; a tab bar for Emacs
+       tabs              ; a tab bar for Emacs
        treemacs            ; a project drawer, like neotree but cooler
        unicode             ; extended unicode support for various languages
        (vc-gutter +pretty) ; vcs diff in the fringe
        vi-tilde-fringe     ; fringe tildes to mark beyond EOB
        ;;window-select     ; visually switch windows
        workspaces          ; tab emulation, persistence & separate workspaces
-       ;;zen               ; distraction-free coding or writing
+       zen               ; distraction-free coding or writing
 
        :editor
-       (evil +everywhere); come to the dark side, we have cookies
-       file-templates    ; auto-snippets for empty files
-       fold              ; (nigh) universal code folding
-       ;;(format +onsave)  ; automated prettiness
+       (evil +everywhere)  ; come to the dark side, we have cookies
+       file-templates      ; auto-snippets for empty files
+       fold                ; (nigh) universal code folding
+       (format +onsave)    ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;;multiple-cursors  ; editing in many places at once
@@ -100,7 +106,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        lookup              ; navigate your code and its documentation
        ;;llm               ; when I said you needed friends, I didn't mean...
-       lsp                 ; M-x vscode
+       (lsp +peek)         ; M-x vscode
        magit               ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -163,7 +169,6 @@
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
         +pretty
-        +roam
         +journal)
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
